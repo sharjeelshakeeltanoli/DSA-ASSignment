@@ -1,0 +1,77 @@
+#include "Stack.h"
+#include <iostream>
+
+template <class ItemType>
+Stack<ItemType>::Stack()
+{
+	top = -1;
+	maxStack = 500;
+	items = new ItemType[500];
+}
+
+template <class ItemType>
+Stack<ItemType>::Stack(int max)
+{
+	top = -1;
+	maxStack = max;
+	items = new ItemType[max];
+}
+
+template <class ItemType>
+Stack<ItemType>::~Stack()
+{
+	delete[] items;
+}
+
+template <class ItemType>
+bool Stack<ItemType>::IsEmpty() const
+{
+	return (top == -1);
+}
+
+template <class ItemType>
+bool Stack<ItemType>::IsFull() const
+{
+	return top == maxStack - 1;
+}
+
+template <class ItemType>
+void Stack<ItemType>::Push(ItemType newItem)
+{
+	if (IsFull())
+	{
+		cout << "\nStack overflow" << endl;
+		exit(1);
+	}
+	else
+	{
+		top++;
+		items[top] = newItem;
+	}
+}
+
+template <class ItemType>
+void Stack<ItemType>::Pop(ItemType& item)
+{
+	if (IsEmpty())
+	{
+		cout << "\nStack underflow" << endl;
+		exit(1);
+	}
+	else
+	{
+		item = items[top];
+		top--;
+	}
+}
+
+template <class ItemType>
+ItemType Stack<ItemType>::Top() const
+{
+	if (IsEmpty())
+	{
+		cout << "\nStack is empty" << endl;
+		exit(1);
+	}
+	return items[top];
+}
